@@ -1,0 +1,77 @@
+{
+  "projectType": [
+    "sap.watt.uitools.ide.fiori"
+  ],
+  "build": {
+    "targetFolder": "dist",
+    "sourceFolder": "webapp",
+    "excludedFolders": [
+      "test"
+    ],
+    "excludedFiles": [
+      "test.html"
+    ]
+  },
+  "dataBinding": {
+    "/webapp/view/App.view.xml": {
+      "entitySet": "UNBINDKEY"
+    },
+    "/webapp/view/NotFound.view.xml": {
+      "entitySet": "UNBINDKEY"
+    },
+    "/webapp/view/DetailObjectNotFound.view.xml": {
+      "entitySet": "UNBINDKEY"
+    },
+    "/webapp/view/DetailNoObjectsAvailable.view.xml": {
+      "entitySet": "UNBINDKEY"
+    },
+    "/webapp/view/Master.view.xml": {
+      "entitySet": "TenderAgentSet"
+    },
+    "/webapp/view/Detail.view.xml": {
+      "entitySet": "TenderAgentSet"
+    }
+  },
+  "generation": [
+    {
+      "templateId": "sap.ui.ui5-template-plugin.2masterdetail",
+      "templateVersion": "1.38.3",
+      "dateTimeStamp": "Wed, 15 Feb 2017 09:01:10 GMT"
+    },
+    {
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Wed, 15 Feb 2017 14:48:27 GMT"
+    }
+  ],
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZLE_TNDR_SRV",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "codeCheckingTriggers": {
+    "notifyBeforePush": true,
+    "notifyBeforePushLevel": "Error",
+    "blockPush": false,
+    "blockPushLevel": "Error"
+  },
+  "basevalidator": {
+    "services": {
+      "xml": "fioriXmlAnalysis",
+      "js": "fioriJsValidator"
+    }
+  },
+  "deploy": {
+    "destination": "ec2-52-57-158-173.eu-central-1.compute.amazonaws.com",
+    "name": "Z_TENDER_AGENT"
+  }
+}

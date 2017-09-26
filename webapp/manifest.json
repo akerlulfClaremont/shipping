@@ -1,0 +1,159 @@
+{
+	"_version": "1.4.0",
+	"sap.app": {
+		"id": "com.tender.agent",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZLE_TNDR_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ZLE_TNDR_SRV": {
+				"uri": "/sap/opu/odata/sap/ZLE_TNDR_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/ZLE_TNDR_SRV/metadata.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "com.tender.agent.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.38.0",
+			"libs": {
+				"sap.ui.core": {
+					"minVersion": "1.38.0"
+				},
+				"sap.m": {
+					"minVersion": "1.38.0"
+				},
+				"sap.ushell": {
+					"minVersion": "1.38.0"
+				},
+				"sap.collaboration": {
+					"minVersion": "1.38",
+					"lazy": true
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.tender.agent.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.tender.agent.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "detailPages",
+				"bypassed": {
+					"target": [
+						"master",
+						"notFound"
+					]
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "master",
+					"target": [
+						"object",
+						"master"
+					]
+				},
+				{
+					"pattern": "TenderAgentSet/{objectId}",
+					"name": "object",
+					"target": [
+						"master",
+						"object"
+					]
+				}
+			],
+			"targets": {
+				"master": {
+					"viewName": "Master",
+					"viewLevel": 1,
+					"viewId": "master",
+					"controlAggregation": "masterPages"
+				},
+				"object": {
+					"viewName": "Detail",
+					"viewId": "detail",
+					"viewLevel": 2
+				},
+				"detailObjectNotFound": {
+					"viewName": "DetailObjectNotFound",
+					"viewId": "detailObjectNotFound"
+				},
+				"detailNoObjectsAvailable": {
+					"viewName": "DetailNoObjectsAvailable",
+					"viewId": "detailNoObjectsAvailable"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				}
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/z_tender_agent/webapp",
+		"_version": "1.1.0"
+	}
+}

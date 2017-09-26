@@ -1,0 +1,76 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="com.tender.agent.controller.Detail">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="Agent tender" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader id="objectHeader" number="{ path: 'TndrMaxp', formatter: '.formatter.currencyValue' }" numberUnit="{TndrActc}" backgroundDesign="Solid" title="{Tknum}" intro="Shipment number">
+				<attributes>
+					<ObjectAttribute text="{Tpbez}"/>
+					<ObjectAttribute text="{path: 'Btgew', formatter: '.formatter.currencyValue'} {Gewei} - {path: 'Volum', formatter: '.formatter.currencyValue'} {Voleh}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus text="Maximum price"/>
+					<ObjectStatus icon="{path: 'Tndrst', formatter: '.formatter.statusIcon'}" text="New offer from shipper" state="Success" id="status"/>
+				</statuses>
+			</ObjectHeader>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://activities" tooltip="{i18n>detailIconTabBarInfo}">
+						<content>
+							<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="__form6">
+								<sap.ui.layout.form:content>
+									<sap.ui.core:Title text="Departure Point" id="__departurePoint" icon="sap-icon://shipping-status"/>
+									<Label text="Shipping Point" id="__shippingPoint"/>
+									<Input width="100%" id="__input5" value="{Vname}" editable="false"/>
+									<Label text="Street Address" id="__label7"/>
+									<Input width="100%" id="__input7" editable="false" fieldGroupIds="" value="{Vstreet} {Vhouse}"/>
+									<Label xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" xmlns="sap.m" text="Street Address" id="__label7_copy"/>
+									<Label text="City" id="__label2"/>
+									<Input value="{VpostCode}, {Vcity}" width="100%" id="__input1" editable="false"/></sap.ui.layout.form:content>
+								<sap.ui.layout.form:customData>
+									<sap.ui.core:CustomData key="w5g.dt.editable" value="true" id="__data26"/>
+								</sap.ui.layout.form:customData>
+							</sap.ui.layout.form:SimpleForm>
+							<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="__form0">
+								<sap.ui.layout.form:content>
+									<sap.ui.core:Title text="Destination Point ({path: 'Distz', formatter: '.formatter.currencyValue'} {Medst})" id="__title0" icon="sap-icon://flag"/>
+									<Label text="Unloading Point" id="__label3"/>
+									<Input width="100%" id="__input2" value="{Nname}" editable="false"/>
+									<Label text="Street Address" id="__label4"/>
+									<Input width="100%" id="__input4" value="{Nstreet} {Nhouse}" editable="false"/>
+									<Label text="City" id="__label5"/>
+									<Input value="{NpostCode}, {Ncity}" width="100%" id="__input6" editable="false"/></sap.ui.layout.form:content>
+							</sap.ui.layout.form:SimpleForm>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://activity-2" tooltip="{i18n>detailIconTabBarAttachments}" iconColor="Positive">
+						<content>
+							<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="__form1">
+								<sap.ui.layout.form:content>
+									<sap.ui.core:Title text="Tender" id="__title1"/>
+									<Label text="Maximum price" id="__label0"/>
+									<Input width="100%" id="__input0" editable="false" value="{path: 'TndrMaxp', formatter: '.formatter.currencyValue'} {TndrActc}"/>
+									<Label text="Actual costs" id="__label1"/>
+									<Input width="100%" id="actCost" editable="{path: 'Tndrst', formatter: '.formatter.editableInput'}" value="{path: 'TndrActp', type: 'sap.ui.model.type.Integer', formatter: '.formatter.currencyValue'}" placeholder="Enter actual costs ..." valueLiveUpdate="true" enabled="true" description="{TndrActc}"/>
+									<Label text="Tender Text" id="__label6"/>
+									<Input value="{TndrText}" width="100%" id="tndrText" editable="{path: 'Tndrst', formatter: '.formatter.editableInput'}"/>
+								</sap.ui.layout.form:content>
+							</sap.ui.layout.form:SimpleForm>
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+		<semantic:customFooterContent>
+			<Button type="Accept" text="Accept" enabled="{path: 'Tndrst', formatter: '.formatter.enabledAccept'}" width="100px" id="__buttonAccept" press="onAccept"/>
+			<Button type="Reject" text="Reject" enabled="{path: 'Tndrst', formatter: '.formatter.enabledReject'}" width="100px" id="__buttonReject" press="onReject"/>
+		</semantic:customFooterContent>
+	</semantic:DetailPage>
+</mvc:View>
